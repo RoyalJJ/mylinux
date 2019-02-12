@@ -1,0 +1,77 @@
+
+<!-- saved from url=(0085)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./04EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./04EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./04EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./04EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./04EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 利用uuidgen和cut命令获取8个字符的随机串。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># uuidgen <span class="sh_symbol">|</span> cut <span class="sh_symbol">-</span>b <span class="sh_symbol">-</span><span class="sh_number">8</span></li><li>c5b39937</li><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># uuidgen <span class="sh_symbol">|</span> cut <span class="sh_symbol">-</span>b <span class="sh_symbol">-</span><span class="sh_number">8</span></li><li>3b0be6b5</li><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># uuidgen <span class="sh_symbol">|</span> cut <span class="sh_symbol">-</span>b <span class="sh_symbol">-</span><span class="sh_number">8</span></li><li>7a2942b5</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# uuidgen | cut -b -8
+c5b39937
+[root@svr5 ~]# uuidgen | cut -b -8
+3b0be6b5
+[root@svr5 ~]# uuidgen | cut -b -8
+7a2942b5
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>2 简述egrep工具的-q选项的含义，并验证其在脚本应用中的价值。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>选项-q的作用是静默、无任何输出，效果类似于正常的egrep操作添加了&amp;&gt; /dev/null来屏蔽输出。在脚本中当需要检测文本内是否存在指定的关键词时，可以利用egrep -q的返回状态值来作为判断依据，从而简化&amp;&gt;输出的操作。</p> 
+    <p>验证效果可参考：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># <span class="sh_normal">cat </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>shells &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//查看测试文本</span></li><li><span class="sh_regexp">/bin/</span>sh</li><li><span class="sh_regexp">/bin/</span>bash</li><li><span class="sh_regexp">/sbin/</span>nologin</li><li><span class="sh_regexp">/bin/</span>dash</li><li><span class="sh_regexp">/bin/</span>tcsh</li><li><span class="sh_regexp">/bin/</span>csh</li><li><span class="sh_regexp">/bin/</span>zsh </li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># egrep <span class="sh_symbol">-</span>q <span class="sh_string">'/zsh'</span> <span class="sh_regexp">/etc/</span>shells <span class="sh_symbol">&amp;&amp;</span> echo yes <span class="sh_symbol">||</span> echo no</li><li>yes  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//支持zsh</span></li><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># egrep <span class="sh_symbol">-</span>q <span class="sh_string">'/bsh'</span> <span class="sh_regexp">/etc/</span>shells <span class="sh_symbol">&amp;&amp;</span> echo yes <span class="sh_symbol">||</span> echo no </li><li>no &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//不支持bsh</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat /etc/shells 							//查看测试文本
+/bin/sh
+/bin/bash
+/sbin/nologin
+/bin/dash
+/bin/tcsh
+/bin/csh
+/bin/zsh 
+
+[root@svr5 ~]# egrep -q '/zsh' /etc/shells &amp;&amp; echo yes || echo no
+yes  														//支持zsh
+[root@svr5 ~]# egrep -q '/bsh' /etc/shells &amp;&amp; echo yes || echo no 
+no 														//不支持bsh
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>3 正则表达式中的+、？、*分别表示什么含义？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>这三个字符用来限制关键词的匹配次数，含义分别如下：</p> 
+    <ul class="list"> 
+     <li>+：最少匹配一次，比如a+可匹配a、aa、aaa等 </li> 
+     <li>？：最多匹配一次，比如a?可匹配零个或一个a </li> 
+     <li>*：匹配任意多次，比如a*可匹配零个或任意多个连续的a </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>4 如何编写正则表达式匹配11位的手机号？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>准备测试文件：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># cat tel<span class="sh_symbol">.</span>txt </li><li><span class="sh_number">01012315</span></li><li><span class="sh_number">137012345678</span></li><li><span class="sh_number">13401234567</span></li><li><span class="sh_number">10086</span></li><li><span class="sh_number">18966677788</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat tel.txt 
+01012315
+137012345678
+13401234567
+10086
+18966677788
+</pre></div></div> 
+    <p>提取包含11位手机号的行：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># egrep <span class="sh_string">'^1[0-9]{10}$'</span> tel<span class="sh_symbol">.</span>txt </li><li><span class="sh_number">13401234567</span></li><li><span class="sh_number">18966677788</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# egrep '^1[0-9]{10}$' tel.txt 
+13401234567
+18966677788
+</pre></div></div> 
+   </div> 
+  </div>  
+ 
+</body></html>

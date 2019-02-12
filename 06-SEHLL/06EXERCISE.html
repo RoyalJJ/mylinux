@@ -1,0 +1,95 @@
+
+<!-- saved from url=(0085)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./06EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./06EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./06EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./06EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./06EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 简述awk工具的基本语法格式。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>格式1： awk [选项] ‘[条件]{处理动作}’ 文件列表 </li> 
+     <li>格式2： 命令 | awk [选项] ‘[条件]{处理动作}’ </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>2 简述awk工具常用的内置变量、各自的作用。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>$n：即$1、$2、$3……，表示指定分隔的第几个字段 </li> 
+     <li>$0：保存当前读入的整行文本内容 </li> 
+     <li>NF：记录当前处理行的字段个数（列数） </li> 
+     <li>NR：记录当前已读入行的数量（行数） </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>3 awk处理文本时，读文件前、读取文件内容中、读文件后后这三个环节是如何表示的？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>BEGIN{ } 文件前处理：awk没有读入行之前 要执行的动作； 一般对数据作初始化操作，可以单独使用。 </li> 
+     <li>{ } 行处理：对awk读入的每一行进行处理，可以单独使用。 </li> 
+     <li>END{ }文件后处理：awk 把所有的行都处理完后要执行的动作，一般输出数据处理的结果。可以单独使用。 </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>4 提取当前eth0网卡的IPv4地址及掩码信息。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>查看测试文本：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># ip add list eth0</li><li><span class="sh_number">2</span><span class="sh_symbol">:</span> eth0<span class="sh_symbol">:</span> <span class="sh_symbol">&lt;</span>BROADCAST<span class="sh_symbol">,</span>MULTICAST<span class="sh_symbol">,</span>UP<span class="sh_symbol">,</span>LOWER_UP<span class="sh_symbol">&gt;</span> mtu <span class="sh_number">1500</span> qdisc pfifo_fast state UP qlen <span class="sh_number">1000</span></li><li>    <span class="sh_normal">link</span><span class="sh_symbol">/</span>ether <span class="sh_number">00</span><span class="sh_symbol">:</span>0c<span class="sh_symbol">:</span><span class="sh_number">29</span><span class="sh_symbol">:</span><span class="sh_number">64</span><span class="sh_symbol">:</span><span class="sh_number">88</span><span class="sh_symbol">:</span>8e brd ff<span class="sh_symbol">:</span>ff<span class="sh_symbol">:</span>ff<span class="sh_symbol">:</span>ff<span class="sh_symbol">:</span>ff<span class="sh_symbol">:</span>ff</li><li>    inet <span class="sh_number">192.168.4.55</span><span class="sh_symbol">/</span><span class="sh_number">24</span> brd <span class="sh_number">192.168.4.255</span> scope global eth0</li><li>    inet <span class="sh_number">192.168.4.5</span><span class="sh_symbol">/</span><span class="sh_number">24</span> brd <span class="sh_number">192.168.4.255</span> scope global secondary eth0</li><li>    inet6 fe80<span class="sh_symbol">::</span>20c<span class="sh_symbol">:</span>29ff<span class="sh_symbol">:</span>fe64<span class="sh_symbol">:</span>888<span class="sh_normal">e</span><span class="sh_symbol">/</span><span class="sh_number">64</span> scope link </li><li>       valid_lft forever preferred_lft forever</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# ip add list eth0
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
+    link/ether 00:0c:29:64:88:8e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.4.55/24 brd 192.168.4.255 scope global eth0
+    inet 192.168.4.5/24 brd 192.168.4.255 scope global secondary eth0
+    inet6 fe80::20c:29ff:fe64:888e/64 scope link 
+       valid_lft forever preferred_lft forever
+</pre></div></div> 
+    <p>提取IPv4地址及掩码信息的操作及效果：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># ip add list eth0 <span class="sh_symbol">|</span> awk <span class="sh_string">'/</span><span class="sh_specialchar">\&lt;</span><span class="sh_string">inet</span><span class="sh_specialchar">\&gt;</span><span class="sh_string">/{print $2}'</span></li><li><span class="sh_number">192.168.4.55</span><span class="sh_symbol">/</span><span class="sh_number">24</span></li><li><span class="sh_number">192.168.4.5</span><span class="sh_symbol">/</span><span class="sh_number">24</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# ip add list eth0 | awk '/\&lt;inet\&gt;/{print $2}'
+192.168.4.55/24
+192.168.4.5/24
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>5 找出UID位于10~20之间的用户，输出用户名及对应的UID。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># awk <span class="sh_symbol">-</span>F<span class="sh_symbol">:</span> <span class="sh_string">'$3&gt;=10 &amp;&amp; $3&lt;=20{print $1":"$3}'</span> <span class="sh_regexp">/etc/</span>passwd</li><li>uucp<span class="sh_symbol">:</span><span class="sh_number">10</span></li><li>operator<span class="sh_symbol">:</span><span class="sh_number">11</span></li><li>games<span class="sh_symbol">:</span><span class="sh_number">12</span></li><li>gopher<span class="sh_symbol">:</span><span class="sh_number">13</span></li><li>ftp<span class="sh_symbol">:</span><span class="sh_number">14</span> </li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# awk -F: '$3&gt;=10 &amp;&amp; $3&lt;=20{print $1":"$3}' /etc/passwd
+uucp:10
+operator:11
+games:12
+gopher:13
+ftp:14 
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>6 找出UID与GID不同的用户，列出用户名及对应的UID、GID。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY06/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># awk <span class="sh_symbol">-</span>F<span class="sh_symbol">:</span> <span class="sh_string">'$3!=$4{print $1":"$3":"$4}'</span> <span class="sh_regexp">/etc/</span>passwd </li><li>adm<span class="sh_symbol">:</span><span class="sh_number">3</span><span class="sh_symbol">:</span><span class="sh_number">4</span></li><li>lp<span class="sh_symbol">:</span><span class="sh_number">4</span><span class="sh_symbol">:</span><span class="sh_number">7</span></li><li>sync<span class="sh_symbol">:</span><span class="sh_number">5</span><span class="sh_symbol">:</span><span class="sh_number">0</span></li><li>shutdown<span class="sh_symbol">:</span><span class="sh_number">6</span><span class="sh_symbol">:</span><span class="sh_number">0</span></li><li>halt<span class="sh_symbol">:</span><span class="sh_number">7</span><span class="sh_symbol">:</span><span class="sh_number">0</span></li><li>mail<span class="sh_symbol">:</span><span class="sh_number">8</span><span class="sh_symbol">:</span><span class="sh_number">12</span></li><li>uucp<span class="sh_symbol">:</span><span class="sh_number">10</span><span class="sh_symbol">:</span><span class="sh_number">14</span></li><li>operator<span class="sh_symbol">:</span><span class="sh_number">11</span><span class="sh_symbol">:</span><span class="sh_number">0</span></li><li>games<span class="sh_symbol">:</span><span class="sh_number">12</span><span class="sh_symbol">:</span><span class="sh_number">100</span></li><li>gopher<span class="sh_symbol">:</span><span class="sh_number">13</span><span class="sh_symbol">:</span><span class="sh_number">30</span></li><li>ftp<span class="sh_symbol">:</span><span class="sh_number">14</span><span class="sh_symbol">:</span><span class="sh_number">50</span></li><li>rtkit<span class="sh_symbol">:</span><span class="sh_number">499</span><span class="sh_symbol">:</span><span class="sh_number">497</span></li><li>saslauth<span class="sh_symbol">:</span><span class="sh_number">498</span><span class="sh_symbol">:</span><span class="sh_number">76</span></li><li>pulse<span class="sh_symbol">:</span><span class="sh_number">497</span><span class="sh_symbol">:</span><span class="sh_number">496</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# awk -F: '$3!=$4{print $1":"$3":"$4}' /etc/passwd 
+adm:3:4
+lp:4:7
+sync:5:0
+shutdown:6:0
+halt:7:0
+mail:8:12
+uucp:10:14
+operator:11:0
+games:12:100
+gopher:13:30
+ftp:14:50
+rtkit:499:497
+saslauth:498:76
+pulse:497:496
+</pre></div></div> 
+   </div> 
+  </div>  
+ 
+</body></html>

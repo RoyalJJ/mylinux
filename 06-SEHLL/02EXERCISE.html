@@ -1,0 +1,69 @@
+
+<!-- saved from url=(0085)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./02EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./02EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./02EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./02EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./02EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 计算根分区的磁盘使用率，百分比精确到2位小数。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>执行df命令可列出已挂载的文件系统使用情况：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># df </li><li>Filesystem                   1K<span class="sh_symbol">-</span>blocks    Used Available Use<span class="sh_symbol">%</span> Mounted on</li><li><span class="sh_regexp">/dev/m</span><span class="sh_normal">apper</span><span class="sh_symbol">/</span>VolGroup<span class="sh_symbol">-</span>lv_root  <span class="sh_number">51606140</span> <span class="sh_number">4292504</span>  <span class="sh_number">44692196</span>   <span class="sh_number">9</span><span class="sh_symbol">%</span> <span class="sh_symbol">/</span></li><li>tmpfs                           <span class="sh_number">502204</span>     <span class="sh_number">228</span>    <span class="sh_number">501976</span>   <span class="sh_number">1</span><span class="sh_symbol">%</span> <span class="sh_regexp">/dev/</span>shm</li><li><span class="sh_regexp">/dev/</span>sda1                       <span class="sh_number">495844</span>   <span class="sh_number">34880</span>    <span class="sh_number">435364</span>   <span class="sh_number">8</span><span class="sh_symbol">%</span> <span class="sh_symbol">/</span>boot</li><li><span class="sh_regexp">/dev/m</span><span class="sh_normal">apper</span><span class="sh_symbol">/</span>VolGroup<span class="sh_symbol">-</span>lv_home  <span class="sh_number">28455944</span>  <span class="sh_number">586380</span>  <span class="sh_number">26424088</span>   <span class="sh_number">3</span><span class="sh_symbol">%</span> <span class="sh_symbol">/</span>home</li><li><span class="sh_symbol">..</span> <span class="sh_symbol">..</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# df 
+Filesystem                   1K-blocks    Used Available Use% Mounted on
+/dev/mapper/VolGroup-lv_root  51606140 4292504  44692196   9% /
+tmpfs                           502204     228    501976   1% /dev/shm
+/dev/sda1                       495844   34880    435364   8% /boot
+/dev/mapper/VolGroup-lv_home  28455944  586380  26424088   3% /home
+.. ..
+</pre></div></div> 
+    <p>可以看到根分区的使用率为9%，百分比不带小数位。</p> 
+    <p>手动计算时，可以用Used栏的已用量除以1K-block栏的总量乘以100，即可获得准确的百分比。结果涉及到小数，因此可以使用bc工具来实现。</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># echo <span class="sh_string">'scale=2;4292504*100/51606140'</span> <span class="sh_symbol">|</span> bc   </li><li><span class="sh_number">8.31</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# echo 'scale=2;4292504*100/51606140' | bc   
+8.31
+</pre></div></div> 
+    <p>即当前根分区的准确使用率为8.31%。</p> 
+   </div> 
+   <div> 
+    <h3>2 列出常见的整数值比较操作，并说明各自作用。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>-eq 等于（Equal） </li> 
+     <li>-ne 不等于（Not Equal） </li> 
+     <li>-ge 大于或等于（Greater or Equal） </li> 
+     <li>-le 小于或等于（Lesser or Equal） </li> 
+     <li>-gt 大于（Greater Than） </li> 
+     <li>-lt 小于（Lesser Than） </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>3 运用条件测试操作，检查当前的用户是否为root。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY02/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># <span class="sh_symbol">[</span> $USER <span class="sh_symbol">==</span> <span class="sh_string">"root"</span> <span class="sh_symbol">]</span> <span class="sh_symbol">&amp;&amp;</span> echo <span class="sh_string">"yes"</span> <span class="sh_symbol">||</span> echo no</li><li>yes</li><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># su <span class="sh_symbol">-</span> mike</li><li><span class="sh_symbol">[</span>mike@svr5 <span class="sh_symbol">~]</span>$ <span class="sh_symbol">[</span> $USER <span class="sh_symbol">==</span> <span class="sh_string">"root"</span> <span class="sh_symbol">]</span> <span class="sh_symbol">&amp;&amp;</span> echo <span class="sh_string">"yes"</span> <span class="sh_symbol">||</span> echo no</li><li>no</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# [ $USER == "root" ] &amp;&amp; echo "yes" || echo no
+yes
+[root@svr5 ~]# su - mike
+[mike@svr5 ~]$ [ $USER == "root" ] &amp;&amp; echo "yes" || echo no
+no
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>4 绘图描述if双分支结构的执行流程。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>if双分支结构判断一次条件，当条件成立时执行分支1、若不成立则执行分支2，如图-1所示。</p> 
+    <div class="image"> 
+     <img src="./02EXERCISE_files/image001.png"> 
+     <p>图-1</p> 
+    </div> 
+   </div> 
+  </div>  
+ 
+</body></html>

@@ -1,0 +1,34 @@
+vlan_trunk_001
+1，三层交换机没有创建vlan10
+2，pc2网关错误
+
+vlan_trunk_002
+1，中间的以太通道中vlan1被排除
+解决办法是进入ms1输入：
+Switch(config)#interface port-channel 1
+Switch(config-if)#switchport trunk allowed vlan add 1
+
+vlan_trunk_003
+1，三层交换机没有开启路由功能
+2，两台交换机直接的链路只能通过vlan1的数据
+
+stp_001
+1，交换机的生成树功能被关闭
+
+stp_001
+1，sw0没有创建vlan2
+
+router_001
+1，pc1与路由器的双绞线用错
+2，pc1网关错误
+
+router_002
+1，acl设置有误
+
+router_003
+1，路由器中有一条错误的静态路由
+
+
+
+
+

@@ -1,0 +1,73 @@
+
+<!-- saved from url=(0088)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./04EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./04EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./04EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./04EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./04EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 iptables的4表和5链分别是什么</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>1）4表包括：nat表、filter表、raw表、mangle表</p> 
+    <p>2）5链包括：INPUT链、OUTPUT链、FORWARD链、PREROUTING链、POSTROUTING链</p> 
+   </div> 
+   <div> 
+    <h3>2 查看iptables防火墙规则的命令是什么</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>nL  INPUT</li><li>target     prot opt source               destination</li><li>ACCEPT     udp  <span class="sh_symbol">--</span>  <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span>            <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span></li><li>ACCEPT     icmp <span class="sh_symbol">--</span>  <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span>            <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span></li><li>ACCEPT     tcp  <span class="sh_symbol">--</span>  <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span>            <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>L  INPUT  <span class="sh_symbol">--</span>line<span class="sh_symbol">-</span>numbers</li><li>num  target     prot opt source         destination</li><li><span class="sh_number">1</span>    ACCEPT     udp   <span class="sh_symbol">--</span>  anywhere     anywhere</li><li><span class="sh_number">2</span>    ACCEPT     icmp <span class="sh_symbol">--</span>  anywhere     anywhere</li><li><span class="sh_number">3</span>    ACCEPT     tcp  <span class="sh_symbol">--</span>  anywhere        anywhere</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr7 ~]# iptables  -nL  INPUT
+target     prot opt source               destination
+ACCEPT     udp  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     icmp --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     tcp  --  0.0.0.0/0            0.0.0.0/0
+
+[root@svr7 ~]# iptables  -L  INPUT  --line-numbers
+num  target     prot opt source         destination
+1    ACCEPT     udp   --  anywhere     anywhere
+2    ACCEPT     icmp --  anywhere     anywhere
+3    ACCEPT     tcp  --  anywhere        anywhere
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>3 清空iptables防火墙规则的命令是什么</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>D  INPUT  <span class="sh_number">3</span></li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>nL  INPUT</li><li>Chain <span class="sh_function">INPUT</span> <span class="sh_symbol">(</span>policy ACCEPT<span class="sh_symbol">)</span></li><li>target     prot opt source               destination</li><li>ACCEPT     udp  <span class="sh_symbol">--</span>  <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span>            <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span></li><li>ACCEPT     icmp <span class="sh_symbol">--</span>  <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span>            <span class="sh_number">0.0.0.0</span><span class="sh_symbol">/</span><span class="sh_number">0</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>F</li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>t  nat  <span class="sh_symbol">-</span>F</li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>t  mangle  <span class="sh_symbol">-</span>F</li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>t  raw  <span class="sh_symbol">-</span>F</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr7 ~]# iptables  -D  INPUT  3
+[root@svr7 ~]# iptables  -nL  INPUT
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination
+ACCEPT     udp  --  0.0.0.0/0            0.0.0.0/0
+ACCEPT     icmp --  0.0.0.0/0            0.0.0.0/0
+
+[root@svr7 ~]# iptables  -F
+[root@svr7 ~]# iptables  -t  nat  -F
+[root@svr7 ~]# iptables  -t  mangle  -F
+[root@svr7 ~]# iptables  -t  raw  -F
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>4 如何开启的Linux的路由转发功能</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li># echo <span class="sh_string">'net.ipv4.ip_forward=1'</span> <span class="sh_symbol">&gt;&gt;</span> <span class="sh_regexp">/etc/</span>sysctl<span class="sh_symbol">.</span>conf</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;"># echo 'net.ipv4.ip_forward=1' &gt;&gt; /etc/sysctl.conf
+</pre></div></div> 
+    <p>或者</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li># echo <span class="sh_number">1</span> <span class="sh_symbol">&gt;</span> <span class="sh_regexp">/proc/</span><span class="sh_normal">sys</span><span class="sh_symbol">/</span><span class="sh_normal">net</span><span class="sh_symbol">/</span><span class="sh_normal">ipv4</span><span class="sh_symbol">/</span>ip_forward</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;"># echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>5 创建一条iptables防火墙规则，实现SNAT源地址转换的命令</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap" style="display: none;"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="hide sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@proxy <span class="sh_symbol">~]</span># iptables  <span class="sh_symbol">-</span>t  nat  <span class="sh_symbol">-</span>A POSTROUTING <span class="sh_symbol">\</span></li><li> <span class="sh_symbol">&gt;</span> <span class="sh_symbol">-</span>s  <span class="sh_number">192.168.4.0</span><span class="sh_symbol">/</span><span class="sh_number">24</span>  <span class="sh_symbol">-</span>p tcp –dport <span class="sh_number">80</span> <span class="sh_symbol">-</span>j SNAT  <span class="sh_symbol">--</span>to<span class="sh_symbol">-</span>source  <span class="sh_number">192.168.2.5</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@proxy ~]# iptables  -t  nat  -A POSTROUTING \
+ &gt; -s  192.168.4.0/24  -p tcp –dport 80 -j SNAT  --to-source  192.168.2.5
+</pre><div class="sh_sourceCode snippet-hide"><pre><a href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#" class="snippet-revealed snippet-toggle sh_url">隐藏</a></pre></div></div><div class="snippet-reveal sh_acid snippet-wrap"><pre class="sh_sourceCode"><a href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY04/EXERCISE/01/index_answer.html#" class="snippet-toggle sh_url">代码</a></pre></div></div> 
+   </div> 
+  </div>  
+ 
+</body></html>

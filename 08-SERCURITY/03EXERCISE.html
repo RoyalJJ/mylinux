@@ -1,0 +1,75 @@
+
+<!-- saved from url=(0088)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./03EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./03EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./03EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./03EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./03EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 Audit配置文件是什么？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>/etc/audit/auditd.conf。</p> 
+   </div> 
+   <div> 
+    <h3>2 Auditctl命令的常用选项有哪些？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># auditctl  <span class="sh_symbol">-</span>s&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//查询状态</span></li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># auditctl  <span class="sh_symbol">-</span>l&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//查看规则</span></li><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># auditctl  <span class="sh_symbol">-</span>D&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//删除所有规则</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr7 ~]# auditctl  -s			//查询状态
+[root@svr7 ~]# auditctl  -l			//查看规则
+[root@svr7 ~]# auditctl  -D			//删除所有规则
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>3 设置规则所有对passwd文件的写、属性修改操作都会被记录审计日志</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr7 <span class="sh_symbol">~]</span># audit  <span class="sh_symbol">-</span><span class="sh_normal">w  </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>passwd  <span class="sh_symbol">-</span>p wa  <span class="sh_symbol">-</span>k  passwd_change</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr7 ~]# audit  -w  /etc/passwd  -p wa  -k  passwd_change
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>4 如何通过key搜索审计日志？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li> <span class="sh_symbol">[</span>roo@svr7 <span class="sh_symbol">~]</span># ausearch <span class="sh_symbol">-</span>k sshd_config <span class="sh_symbol">-</span>i&nbsp;&nbsp;&nbsp;&nbsp;</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;"> [roo@svr7 ~]# ausearch -k sshd_config -i	
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>5 简述ngx_http_limit_req_module模块的用法？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li>limit_req_zone $binary_remote_addr  zone<span class="sh_symbol">=</span>one<span class="sh_symbol">:</span>10m rate<span class="sh_symbol">=</span>1<span class="sh_normal">r</span><span class="sh_symbol">/</span>s<span class="sh_symbol">;</span></li><li>limit_req zone<span class="sh_symbol">=</span>one burst<span class="sh_symbol">=</span><span class="sh_number">5</span><span class="sh_symbol">;</span></li><li>语法：limit_req_zone key zone<span class="sh_symbol">=</span>name<span class="sh_symbol">:</span>size rate<span class="sh_symbol">=</span>rate<span class="sh_symbol">;</span></li><li>将客户端IP信息存储名称为one的共享内存，空间为10M</li><li>1M可以存储<span class="sh_number">8</span>千个IP的信息，10M存<span class="sh_number">8</span>万个主机状态</li><li>每秒中仅接受<span class="sh_number">1</span>个请求，多余的放入漏斗</li><li>漏斗超过<span class="sh_number">5</span>个则报错</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">limit_req_zone $binary_remote_addr  zone=one:10m rate=1r/s;
+limit_req zone=one burst=5;
+语法：limit_req_zone key zone=name:size rate=rate;
+将客户端IP信息存储名称为one的共享内存，空间为10M
+1M可以存储8千个IP的信息，10M存8万个主机状态
+每秒中仅接受1个请求，多余的放入漏斗
+漏斗超过5个则报错
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>6 备份与还原MySQL数据库的方法？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY03/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>roo@svr7 <span class="sh_symbol">~]</span># mysqldump <span class="sh_symbol">-</span>uroot <span class="sh_symbol">-</span>predhat mydb table <span class="sh_symbol">&gt;</span> table<span class="sh_symbol">.</span>sql</li><li><span class="sh_comment">//备份mydb数据库中的table表</span></li><li><span class="sh_symbol">[</span>roo@svr7 <span class="sh_symbol">~]</span># mysqldump <span class="sh_symbol">-</span>uroot <span class="sh_symbol">-</span>predhat mydb <span class="sh_symbol">&gt;</span> mydb<span class="sh_symbol">.</span>sql</li><li><span class="sh_comment">//备份mydb数据库中的所有数据表</span></li><li><span class="sh_symbol">[</span>roo@svr7 <span class="sh_symbol">~]</span># mysqldump <span class="sh_symbol">-</span>uroot <span class="sh_symbol">-</span>predhat <span class="sh_symbol">--</span>all<span class="sh_symbol">-</span>databases <span class="sh_symbol">&gt;</span> all<span class="sh_symbol">.</span>sql</li><li><span class="sh_comment">//备份所有数据库</span></li><li><span class="sh_symbol">[</span>roo@svr7 <span class="sh_symbol">~]</span># mysql <span class="sh_symbol">-</span>uroot <span class="sh_symbol">-</span>predhat mydb  <span class="sh_symbol">&lt;</span> table<span class="sh_symbol">.</span>sql      &nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//还原表</span></li><li><span class="sh_symbol">[</span>roo@svr7 <span class="sh_symbol">~]</span># mysql <span class="sh_symbol">-</span>uroot <span class="sh_symbol">-</span>predhat mydb  <span class="sh_symbol">&lt;</span> mydb<span class="sh_symbol">.</span>sql    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//还原数据库</span></li><li><span class="sh_symbol">[</span>roo@svr7 <span class="sh_symbol">~]</span># mysql <span class="sh_symbol">-</span>uroot <span class="sh_symbol">-</span>predhat <span class="sh_symbol">&lt;</span> all<span class="sh_symbol">.</span>sql&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//还原所有</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[roo@svr7 ~]# mysqldump -uroot -predhat mydb table &gt; table.sql
+//备份mydb数据库中的table表
+[roo@svr7 ~]# mysqldump -uroot -predhat mydb &gt; mydb.sql
+//备份mydb数据库中的所有数据表
+[roo@svr7 ~]# mysqldump -uroot -predhat --all-databases &gt; all.sql
+//备份所有数据库
+[roo@svr7 ~]# mysql -uroot -predhat mydb  &lt; table.sql      	//还原表
+[roo@svr7 ~]# mysql -uroot -predhat mydb  &lt; mydb.sql    		//还原数据库
+[roo@svr7 ~]# mysql -uroot -predhat &lt; all.sql				//还原所有
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>7 Linux系统中生成补丁与打补丁的命令是什么？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>生成补丁的命令是diff，打补丁的命令是patch。</p> 
+   </div> 
+  </div>  
+ 
+</body></html>

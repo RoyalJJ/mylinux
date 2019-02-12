@@ -1,0 +1,120 @@
+
+<!-- saved from url=(0085)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./05EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./05EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./05EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./05EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./05EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 简述sed定址符的作用及表示方式。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>作用：地址符（执行指令的条件）控制sed需要处理文本的范围；不加定址符则逐行处理所有行 </li> 
+     <li>表示方式：地址符可以使用行号或正则表达式 </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>2 如何使用sed提取文本中的偶数行？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>查看测试文本：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># cat <span class="sh_symbol">-</span><span class="sh_normal">n </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>rc<span class="sh_symbol">.</span>local </li><li>     <span class="sh_number">1</span>  #<span class="sh_symbol">!</span><span class="sh_regexp">/bin/</span>sh</li><li>     <span class="sh_number">2</span>  #</li><li>     <span class="sh_number">3</span>  # This script will be executed <span class="sh_symbol">*</span>after<span class="sh_symbol">*</span> all the other init scripts<span class="sh_symbol">.</span></li><li>     <span class="sh_number">4</span>  # You can put your own initialization stuff <span class="sh_keyword">in</span> here <span class="sh_keyword">if</span> you don<span class="sh_string">'t</span></li><li><span class="sh_string">     5  # want to do the full Sys V style init stuff.</span></li><li><span class="sh_string">     6</span></li><li><span class="sh_string">     7  touch /var/lock/subsys/local</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat -n /etc/rc.local 
+     1  #!/bin/sh
+     2  #
+     3  # This script will be executed *after* all the other init scripts.
+     4  # You can put your own initialization stuff in here if you don't
+     5  # want to do the full Sys V style init stuff.
+     6
+     7  touch /var/lock/subsys/local
+</pre></div></div> 
+    <p>提取偶数行的操作及效果：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># cat <span class="sh_symbol">-</span><span class="sh_normal">n </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>rc<span class="sh_symbol">.</span>local <span class="sh_symbol">|</span> sed <span class="sh_symbol">-</span>n <span class="sh_string">'2~2p'</span></li><li>     <span class="sh_number">2</span>  #</li><li>     <span class="sh_number">4</span>  # You can put your own initialization stuff <span class="sh_keyword">in</span> here <span class="sh_keyword">if</span> you don<span class="sh_string">'t</span></li><li><span class="sh_string">     6</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat -n /etc/rc.local | sed -n '2~2p'
+     2  #
+     4  # You can put your own initialization stuff in here if you don't
+     6
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>3 如何使用sed删除文本中每行的第4个字符？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>查看测试文本：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># <span class="sh_normal">cat </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>rc<span class="sh_symbol">.</span>local </li><li>#<span class="sh_symbol">!</span><span class="sh_regexp">/bin/</span>sh</li><li>#</li><li># This script will be executed <span class="sh_symbol">*</span>after<span class="sh_symbol">*</span> all the other init scripts<span class="sh_symbol">.</span></li><li># You can put your own initialization stuff <span class="sh_keyword">in</span> here <span class="sh_keyword">if</span> you don<span class="sh_string">'t</span></li><li><span class="sh_string"># want to do the full Sys V style init stuff.</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_string">touch /var/lock/subsys/local</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat /etc/rc.local 
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+</pre></div></div> 
+    <p>删除每行第4个字符的操作及效果：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># <span class="sh_normal">cat </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>rc<span class="sh_symbol">.</span>local <span class="sh_symbol">|</span> sed <span class="sh_string">'s/.//4'</span></li><li>#<span class="sh_symbol">!</span><span class="sh_regexp">/in/</span>sh</li><li>#</li><li># Tis script will be executed <span class="sh_symbol">*</span>after<span class="sh_symbol">*</span> all the other init scripts<span class="sh_symbol">.</span></li><li># Yu can put your own initialization stuff <span class="sh_keyword">in</span> here <span class="sh_keyword">if</span> you don<span class="sh_string">'t</span></li><li><span class="sh_string"># wnt to do the full Sys V style init stuff.</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_string">touh /var/lock/subsys/local</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat /etc/rc.local | sed 's/.//4'
+#!/in/sh
+#
+# Tis script will be executed *after* all the other init scripts.
+# Yu can put your own initialization stuff in here if you don't
+# wnt to do the full Sys V style init stuff.
+
+touh /var/lock/subsys/local
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>4 提取/etc/passwd文件的第6-10行，另存为pass5.txt文件。</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>提取或导出文本：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># sed <span class="sh_symbol">-</span>n <span class="sh_string">'6,10p'</span> <span class="sh_regexp">/etc/</span>passwd <span class="sh_symbol">&gt;</span> pass5<span class="sh_symbol">.</span>txt</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# sed -n '6,10p' /etc/passwd &gt; pass5.txt
+</pre></div></div> 
+    <p>或者：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># sed <span class="sh_symbol">-</span>n <span class="sh_string">'6,10w pass5.txt'</span> <span class="sh_regexp">/etc/</span>passwd</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# sed -n '6,10w pass5.txt' /etc/passwd
+</pre></div></div> 
+    <p>确认提取结果：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># cat pass5<span class="sh_symbol">.</span>txt </li><li>sync<span class="sh_symbol">:</span>x<span class="sh_symbol">:</span><span class="sh_number">5</span><span class="sh_symbol">:</span><span class="sh_number">0</span><span class="sh_symbol">:</span>sync<span class="sh_symbol">:</span><span class="sh_regexp">/sbin:/</span><span class="sh_normal">bin</span><span class="sh_symbol">/</span>sync</li><li>shutdown<span class="sh_symbol">:</span>x<span class="sh_symbol">:</span><span class="sh_number">6</span><span class="sh_symbol">:</span><span class="sh_number">0</span><span class="sh_symbol">:</span>shutdown<span class="sh_symbol">:</span><span class="sh_regexp">/sbin:/</span><span class="sh_normal">sbin</span><span class="sh_symbol">/</span>shutdown</li><li>halt<span class="sh_symbol">:</span>x<span class="sh_symbol">:</span><span class="sh_number">7</span><span class="sh_symbol">:</span><span class="sh_number">0</span><span class="sh_symbol">:</span>halt<span class="sh_symbol">:</span><span class="sh_regexp">/sbin:/</span><span class="sh_normal">sbin</span><span class="sh_symbol">/</span>halt</li><li>mail<span class="sh_symbol">:</span>x<span class="sh_symbol">:</span><span class="sh_number">8</span><span class="sh_symbol">:</span><span class="sh_number">12</span><span class="sh_symbol">:</span>mail<span class="sh_symbol">:</span><span class="sh_regexp">/var/</span><span class="sh_normal">spool</span><span class="sh_symbol">/</span>mail<span class="sh_symbol">:</span><span class="sh_regexp">/sbin/</span>nologin</li><li>uucp<span class="sh_symbol">:</span>x<span class="sh_symbol">:</span><span class="sh_number">10</span><span class="sh_symbol">:</span><span class="sh_number">14</span><span class="sh_symbol">:</span>uucp<span class="sh_symbol">:</span><span class="sh_regexp">/var/</span><span class="sh_normal">spool</span><span class="sh_symbol">/</span>uucp<span class="sh_symbol">:</span><span class="sh_regexp">/sbin/</span>nologin</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat pass5.txt 
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+uucp:x:10:14:uucp:/var/spool/uucp:/sbin/nologin
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>5 如何使用sed将文本的第3-4行移动到原来的第6行之后？</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>查看测试文本：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># cat <span class="sh_symbol">-</span><span class="sh_normal">n </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>rc<span class="sh_symbol">.</span>local</li><li>     <span class="sh_number">1</span>  #<span class="sh_symbol">!</span><span class="sh_regexp">/bin/</span>sh</li><li>     <span class="sh_number">2</span>  #</li><li>     <span class="sh_number">3</span>  # This script will be executed <span class="sh_symbol">*</span>after<span class="sh_symbol">*</span> all the other init scripts<span class="sh_symbol">.</span></li><li>     <span class="sh_number">4</span>  # You can put your own initialization stuff <span class="sh_keyword">in</span> here <span class="sh_keyword">if</span> you don<span class="sh_string">'t</span></li><li><span class="sh_string">     5  # want to do the full Sys V style init stuff.</span></li><li><span class="sh_string">     6</span></li><li><span class="sh_string">     7  touch /var/lock/subsys/local</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat -n /etc/rc.local
+     1  #!/bin/sh
+     2  #
+     3  # This script will be executed *after* all the other init scripts.
+     4  # You can put your own initialization stuff in here if you don't
+     5  # want to do the full Sys V style init stuff.
+     6
+     7  touch /var/lock/subsys/local
+</pre></div></div> 
+    <p>剪切操作及效果：</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SHELL/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@svr5 <span class="sh_symbol">~]</span># cat <span class="sh_symbol">-</span><span class="sh_normal">n </span><span class="sh_symbol">/</span><span class="sh_normal">etc</span><span class="sh_symbol">/</span>rc<span class="sh_symbol">.</span>local <span class="sh_symbol">|</span> sed <span class="sh_string">'3h;4H;3,4d;6G'</span></li><li>     <span class="sh_number">1</span>  #<span class="sh_symbol">!</span><span class="sh_regexp">/bin/</span>sh</li><li>     <span class="sh_number">2</span>  #</li><li>     <span class="sh_number">5</span>  # want to <span class="sh_keyword">do</span> the full Sys V style init stuff<span class="sh_symbol">.</span></li><li>     <span class="sh_number">6</span></li><li>     <span class="sh_number">3</span>  # This script will be executed <span class="sh_symbol">*</span>after<span class="sh_symbol">*</span> all the other init scripts<span class="sh_symbol">.</span></li><li>     <span class="sh_number">4</span>  # You can put your own initialization stuff <span class="sh_keyword">in</span> here <span class="sh_keyword">if</span> you don<span class="sh_string">'t</span></li><li><span class="sh_string">     7  touch /var/lock/subsys/local</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@svr5 ~]# cat -n /etc/rc.local | sed '3h;4H;3,4d;6G'
+     1  #!/bin/sh
+     2  #
+     5  # want to do the full Sys V style init stuff.
+     6
+     3  # This script will be executed *after* all the other init scripts.
+     4  # You can put your own initialization stuff in here if you don't
+     7  touch /var/lock/subsys/local
+</pre></div></div> 
+    <p>上述操作中，sed编辑指令分别解析如下：</p> 
+    <ul class="list"> 
+     <li>3h：取第3行内容，覆盖到保持空间 </li> 
+     <li>4H：取第4行内容，追加到保持空间 </li> 
+     <li>3,4d：删除第3-4行内容 </li> 
+     <li>6G：找到第6行，将保持空间的内容追加到这 </li> 
+    </ul> 
+   </div> 
+  </div>  
+ 
+</body></html>

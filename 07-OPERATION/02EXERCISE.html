@@ -1,0 +1,75 @@
+
+<!-- saved from url=(0089)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY02/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./02EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./02EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./02EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./02EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./02EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 简述什么是LNMP</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>LNMP是网站运行平台。</p> 
+    <ul class="list"> 
+     <li>L：操作系统（Linux） </li> 
+     <li>N：网站服务软件（Nginx） </li> 
+     <li>M：数据库服务软件（MariaDB） </li> 
+     <li>P：网站开发语言（PHP、perl、python） </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>2 部署LNMP时，如何修改Nginx配置文件</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY02/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY02/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY02/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@nginx <span class="sh_symbol">~]</span># <span class="sh_normal">vim </span><span class="sh_symbol">/</span><span class="sh_normal">usr</span><span class="sh_symbol">/</span><span class="sh_normal">local</span><span class="sh_symbol">/</span><span class="sh_normal">nginx</span><span class="sh_symbol">/</span>nginx<span class="sh_symbol">.</span>conf</li><li><span class="sh_symbol">..</span> <span class="sh_symbol">..</span></li><li><span class="sh_normal">location </span><span class="sh_symbol">/</span> <span class="sh_cbracket">{</span></li><li>            root   html<span class="sh_symbol">;</span></li><li>            index  index<span class="sh_symbol">.</span>php  index<span class="sh_symbol">.</span>html   index<span class="sh_symbol">.</span>htm<span class="sh_symbol">;</span></li><li>        <span class="sh_cbracket">}</span></li><li> location  <span class="sh_symbol">~</span>  <span class="sh_symbol">\.</span>php$  <span class="sh_cbracket">{</span></li><li>            root           html<span class="sh_symbol">;</span></li><li>            fastcgi_pass   <span class="sh_number">127.0.0.1</span><span class="sh_symbol">:</span><span class="sh_number">9000</span><span class="sh_symbol">;</span></li><li>            fastcgi_index  index<span class="sh_symbol">.</span>php<span class="sh_symbol">;</span></li><li>           # fastcgi_param   <span class="sh_normal">SCRIPT_FILENAME  </span><span class="sh_symbol">/</span>scripts$fastcgi_script_name<span class="sh_symbol">;</span></li><li>            include        fastcgi_conf<span class="sh_symbol">;</span></li><li>        <span class="sh_cbracket">}</span></li><li><span class="sh_symbol">..</span> <span class="sh_symbol">..</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@nginx ~]# vim /usr/local/nginx/nginx.conf
+.. ..
+location / {
+            root   html;
+            index  index.php  index.html   index.htm;
+        }
+ location  ~  \.php$  {
+            root           html;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+           # fastcgi_param   SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+            include        fastcgi_conf;
+        }
+.. ..
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>3 地址重写的好处</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>缩短URL，隐藏实际路径提高安全性； </li> 
+     <li>易于用户记忆和键入； </li> 
+     <li>易于被搜索引擎收录。 </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>4 使用Nginx实现域名跳转</h3> 
+    <p>要求：访问www.tarena.com时自动跳转至bbs.tarena.com</p> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY02/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY02/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY02/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@nginx <span class="sh_symbol">~]</span># <span class="sh_normal">cat </span><span class="sh_symbol">/</span><span class="sh_normal">usr</span><span class="sh_symbol">/</span><span class="sh_normal">local</span><span class="sh_symbol">/</span><span class="sh_normal">nginx</span><span class="sh_symbol">/</span><span class="sh_normal">conf</span><span class="sh_symbol">/</span>nginx<span class="sh_symbol">.</span>conf</li><li><span class="sh_symbol">..</span> <span class="sh_symbol">..</span></li><li>server <span class="sh_cbracket">{</span></li><li>        listen       <span class="sh_number">80</span><span class="sh_symbol">;</span></li><li>        server_name  www<span class="sh_symbol">.</span>tarena<span class="sh_symbol">.</span>com<span class="sh_symbol">;</span></li><li><span class="sh_normal">location </span><span class="sh_symbol">/</span> <span class="sh_cbracket">{</span></li><li>&nbsp;&nbsp;&nbsp;&nbsp;root   html<span class="sh_symbol">;</span></li><li>index  index<span class="sh_symbol">.</span>html index<span class="sh_symbol">.</span>htm<span class="sh_symbol">;</span></li><li>rewrite <span class="sh_symbol">^</span><span class="sh_regexp">/ http://bbs.tarena.com/</span><span class="sh_symbol">;</span></li><li><span class="sh_cbracket">}</span></li><li><span class="sh_cbracket">}</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@nginx ~]# cat /usr/local/nginx/conf/nginx.conf
+.. ..
+server {
+        listen       80;
+        server_name  www.tarena.com;
+location / {
+	root   html;
+index  index.html index.htm;
+rewrite ^/ http://bbs.tarena.com/;
+}
+}
+</pre></div></div> 
+   </div> 
+  </div>  
+ 
+</body></html>

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<!-- saved from url=(0043)https://www.zybuluo.com/dyj2017/note/920621 -->
+<html class="theme theme-white"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
+    <meta name="description" content="Cmd Markdown 编辑阅读器，支持实时同步预览，区分写作和阅读模式，支持在线存储，分享文稿网址。">
+    <meta name="author" content="Jiawei Zhang">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <title>ceph-deploy add mon失败 - 作业部落 Cmd Markdown 编辑阅读器</title>
+
+
+    <link href="https://www.zybuluo.com/static/img/favicon.png" type="image/x-icon" rel="icon">
+
+    <link href="./ceph报错解决_files/1bc053c8.base.lib.min.css" rel="stylesheet" media="screen">
+
+
+    
+    <!-- id="prettify-style" will be used to get the link element below and change href to change prettify code, so it can't be in beginmin/endmin block. -->
+    <link id="prettify-style" href="./ceph报错解决_files/prettify-cmd.css" type="text/css" rel="stylesheet">
+    <!--
+    <link id="mermaid-style" href="https://www.zybuluo.com/static/editor/libs/mermaid/mermaid.forest.css" type="text/css" rel="stylesheet">
+    -->
+    <link href="./ceph报错解决_files/45c7d56d.layout.min.css" rel="stylesheet" media="screen">
+
+
+    
+
+    <script async="" src="./ceph报错解决_files/analytics.js"></script><script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-44461741-1', 'zybuluo.com');
+      ga('send', 'pageview');
+    </script>
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style></head>
+
+<body class="theme  theme-white pace-done"><div id="MathJax_Message" style="display: none;"></div><div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+  <div class="pace-progress-inner"></div>
+</div>
+<div class="pace-activity"></div></div>
+
+    <div id="global-prompt-alert" class="hide alert alert-warning">
+        <span id="global-prompt-message"></span>
+        <a id="close-global-prompt-alert" href="https://www.zybuluo.com/dyj2017/note/920621">[关闭]</a>
+    </div>
+
+    <!-- zybuluo's body -->
+    
+
+
+
+
+
+
+
+<!-- mdeditor's body -->
+
+
+
+
+
+
+<div id="editor-reader-full" class="editor-reader-full-shown" style="position: static; padding-right: 75px;">
+    <div id="reader-full-topInfo" class="reader-full-topInfo-shown">
+        <span>
+            <code>@dyj2017</code>
+        </span>
+        <code><span class="article-updated-date">2017-10-19 15:21</span></code>
+        <code><span>字数 </span><span class="article-characters">1319</span></code>
+        <code><span>阅读 </span><span class="article-read">2264</span></code>
+    </div>
+    <div id="wmd-preview" class="wmd-preview wmd-preview-full-reader" data-medium-element="true"><div class="md-section-divider"></div><div class="md-section-divider"></div><h1 data-anchor-id="55h9" id="ceph-deploy-add-mon失败">ceph-deploy add mon失败</h1><p data-anchor-id="r4wg"><code>ceph-deploy</code> <code>运维</code></p><hr><div class="md-section-divider"></div><h2 data-anchor-id="wk12" id="问题描述">问题描述：</h2><p data-anchor-id="j1by">现有集群只有一个mon，需要通过ceph-deploy mon add添加两个mon。在admin节点执行命令：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="o7zr" style=""><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># ceph-deploy mon add node2</span></code></li></ol></pre><p data-anchor-id="530p">提示如下error：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="uo0a" style=""><ol class="linenums"><li class="L0"><code class="language-bash"><span class="pun">[</span><span class="pln">node2</span><span class="pun">][</span><span class="pln">ERROR </span><span class="pun">]</span><span class="pln"> admin_socket</span><span class="pun">:</span><span class="pln"> exception getting command descriptions</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="typ">Errno</span><span class="pln"> </span><span class="lit">2</span><span class="pun">]</span><span class="pln"> </span><span class="typ">No</span><span class="pln"> such file or directory</span></code></li><li class="L1"><code class="language-bash"><span class="pun">[</span><span class="pln">node2</span><span class="pun">][</span><span class="pln">WARNIN</span><span class="pun">]</span><span class="pln"> node2 is not defined </span><span class="kwd">in</span><span class="pln"> </span><span class="str">`mon initial members`</span></code></li><li class="L2"><code class="language-bash"><span class="pun">[</span><span class="pln">node2</span><span class="pun">][</span><span class="pln">WARNIN</span><span class="pun">]</span><span class="pln"> monitor node2 does not exist </span><span class="kwd">in</span><span class="pln"> monmap</span></code></li><li class="L3"><code class="language-bash"><span class="pun">[</span><span class="pln">node2</span><span class="pun">][</span><span class="pln">WARNIN</span><span class="pun">]</span><span class="pln"> neither </span><span class="str">`public_addr`</span><span class="pln"> nor </span><span class="str">`public_network`</span><span class="pln"> keys are defined </span><span class="kwd">for</span><span class="pln"> monitors</span></code></li><li class="L4"><code class="language-bash"><span class="pun">[</span><span class="pln">node2</span><span class="pun">][</span><span class="pln">WARNIN</span><span class="pun">]</span><span class="pln"> monitors may not be able to form quorum</span></code></li><li class="L5"><code class="language-bash"><span class="pun">[</span><span class="pln">node2</span><span class="pun">][</span><span class="pln">INFO  </span><span class="pun">]</span><span class="pln"> </span><span class="typ">Running</span><span class="pln"> command</span><span class="pun">:</span><span class="pln"> sudo ceph </span><span class="pun">--</span><span class="pln">cluster</span><span class="pun">=</span><span class="pln">ceph </span><span class="pun">--</span><span class="pln">admin</span><span class="pun">-</span><span class="pln">daemon </span><span class="pun">/</span><span class="pln">var</span><span class="pun">/</span><span class="pln">run</span><span class="pun">/</span><span class="pln">ceph</span><span class="pun">/</span><span class="pln">ceph</span><span class="pun">-</span><span class="pln">mon</span><span class="pun">.</span><span class="pln">node2</span><span class="pun">.</span><span class="pln">asok mon_status</span></code></li></ol></pre><div class="md-section-divider"></div><h2 data-anchor-id="zh8c" id="解决方法">解决方法：</h2><p data-anchor-id="esef">通过上面日志可知ceph.conf配置文件中缺少public network的配置，在admin节点中，my-cluster目录下的ceph.conf的[global]下添加对应的网址：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="zedr" style=""><ol class="linenums"><li class="L0"><code class="language-bash"><span class="pun">[</span><span class="pln">global</span><span class="pun">]</span></code></li><li class="L1"><code class="language-bash"><span class="pln">fsid </span><span class="pun">=</span><span class="pln"> b8b4aa68</span><span class="pun">-</span><span class="pln">d825</span><span class="pun">-</span><span class="lit">43e9</span><span class="pun">-</span><span class="pln">a60a</span><span class="pun">-</span><span class="lit">781c92fec20e</span></code></li><li class="L2"><code class="language-bash"><span class="pln">mon_initial_members </span><span class="pun">=</span><span class="pln"> node1</span></code></li><li class="L3"><code class="language-bash"><span class="pln">mon_host </span><span class="pun">=</span><span class="pln"> </span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">197.154</span></code></li><li class="L4"><code class="language-bash"><span class="pln">auth_cluster_required </span><span class="pun">=</span><span class="pln"> cephx</span></code></li><li class="L5"><code class="language-bash"><span class="pln">auth_service_required </span><span class="pun">=</span><span class="pln"> cephx</span></code></li><li class="L6"><code class="language-bash"><span class="pln">auth_client_required </span><span class="pun">=</span><span class="pln"> cephx</span></code></li><li class="L7"><code class="language-bash"></code></li><li class="L8"><code class="language-bash"><span class="pln">public network </span><span class="pun">=</span><span class="lit">192.168</span><span class="pun">.</span><span class="lit">197.0</span><span class="pun">/</span><span class="lit">24</span></code></li></ol></pre><p data-anchor-id="e6gp">之后通过执行下面的命令把修改推送至每个节点，否则提示error：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="jnwf" style=""><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># ceph-deploy --overwrite-conf config push node1 node2 node3</span></code></li></ol></pre><p data-anchor-id="w3qp">执行命令为cluster添加mon：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="8wiu" style=""><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># ceph-deploy mon add node2</span></code></li><li class="L1"><code class="language-bash"><span class="com"># ceph-deploy mon add node3</span></code></li></ol></pre><p data-anchor-id="rde4">通过ceph -s查看集群状态：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="mtkq" style=""><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># ceph -s</span></code></li><li class="L1"><code class="language-bash"><span class="pln"> cluster</span><span class="pun">:</span></code></li><li class="L2"><code class="language-bash"><span class="pln">    id</span><span class="pun">:</span><span class="pln">     b8b4aa68</span><span class="pun">-</span><span class="pln">d825</span><span class="pun">-</span><span class="lit">43e9</span><span class="pun">-</span><span class="pln">a60a</span><span class="pun">-</span><span class="lit">781c92fec20e</span></code></li><li class="L3"><code class="language-bash"><span class="pln">    health</span><span class="pun">:</span><span class="pln"> HEALTH_WARN</span></code></li><li class="L4"><code class="language-bash"><span class="pln">            clock skew detected on mon</span><span class="pun">.</span><span class="pln">node2</span><span class="pun">,</span><span class="pln"> mon</span><span class="pun">.</span><span class="pln">node3</span></code></li><li class="L5"><code class="language-bash"></code></li><li class="L6"><code class="language-bash"><span class="pln">  services</span><span class="pun">:</span></code></li><li class="L7"><code class="language-bash"><span class="pln">    mon</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> daemons</span><span class="pun">,</span><span class="pln"> quorum node1</span><span class="pun">,</span><span class="pln">node2</span><span class="pun">,</span><span class="pln">node3</span></code></li><li class="L8"><code class="language-bash"><span class="pln">    mgr</span><span class="pun">:</span><span class="pln"> node1</span><span class="pun">(</span><span class="pln">active</span><span class="pun">)</span></code></li><li class="L9"><code class="language-bash"><span class="pln">    osd</span><span class="pun">:</span><span class="pln"> </span><span class="lit">6</span><span class="pln"> osds</span><span class="pun">:</span><span class="pln"> </span><span class="lit">6</span><span class="pln"> up</span><span class="pun">,</span><span class="pln"> </span><span class="lit">6</span><span class="pln"> </span><span class="kwd">in</span></code></li><li class="L0"><code class="language-bash"></code></li><li class="L1"><code class="language-bash"><span class="pln">  data</span><span class="pun">:</span></code></li><li class="L2"><code class="language-bash"><span class="pln">    pools</span><span class="pun">:</span><span class="pln">   </span><span class="lit">0</span><span class="pln"> pools</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> pgs</span></code></li><li class="L3"><code class="language-bash"><span class="pln">    objects</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> objects</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> bytes</span></code></li><li class="L4"><code class="language-bash"><span class="pln">    usage</span><span class="pun">:</span><span class="pln">   </span><span class="lit">6346</span><span class="pln"> MB used</span><span class="pun">,</span><span class="pln"> </span><span class="lit">55093</span><span class="pln"> MB </span><span class="pun">/</span><span class="pln"> </span><span class="lit">61440</span><span class="pln"> MB avail</span></code></li><li class="L5"><code class="language-bash"><span class="pln">    pgs</span><span class="pun">:</span><span class="pln">     </span></code></li></ol></pre><p data-anchor-id="nrdz">可以看到成功添加了两个mon：node2 node3。</p></div>
+    <div class="remark-icons"><div class="remark-icon unselectable remark-icon-empty" style="top: 107px; left: 1347px; display: none;" data-anchor-id="55h9">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 167px; left: 1347px; display: none;" data-anchor-id="r4wg">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 262px; left: 792px; display: none;" data-anchor-id="wk12">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 322px; left: 1347px; display: block;" data-anchor-id="j1by">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 369px; left: 1347px; display: none;" data-anchor-id="o7zr">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 428px; left: 1347px; display: none;" data-anchor-id="530p">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 475px; left: 1347px; display: none;" data-anchor-id="uo0a">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 689px; left: 1347px; display: none;" data-anchor-id="zh8c">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 749px; left: 1347px; display: none;" data-anchor-id="esef">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 823px; left: 1347px; display: none;" data-anchor-id="zedr">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="e6gp">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="jnwf">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="w3qp">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="8wiu">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="top: 1274px; left: 1347px; display: none;" data-anchor-id="rde4">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count">+</span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="mtkq">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div><div class="remark-icon unselectable remark-icon-empty" style="display: none;" data-anchor-id="nrdz">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div></div>
+</div>
+
+<!--in page preview buttons. -->
+<div class="in-page-preview-buttons in-page-preview-buttons-full-reader">
+    <ul>
+        <li class="in-page-button dropdown" id="preview-toc-button" title="内容目录 Ctrl+Alt+O">
+            <span class="dropdown-toggle icon-list" data-toggle="dropdown" style="color: rgba(102, 128, 153, 0.45);"></span>
+            <div id="toc-list" class="dropdown-menu theme pull-right theme-white"> <!-- Add theme means this element will be changed when apply theme color. -->
+                <h3>内容目录</h3>
+                <hr>
+                <div class="table-of-contents"><div class="toc">
+<ul>
+<li><a href="https://www.zybuluo.com/dyj2017/note/920621#ceph-deploy-add-mon失败">ceph-deploy add mon失败</a><ul>
+<li><a href="https://www.zybuluo.com/dyj2017/note/920621#问题描述">问题描述：</a></li>
+<li><a href="https://www.zybuluo.com/dyj2017/note/920621#解决方法">解决方法：</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div id="reader-full-toolbar" class="reader-full-toolbar-shown" style="padding-top: 0;">
+    <ul id="reader-full-toolbar-home" class="preview-button-row">
+        <li class="preview-button-full-reader" id="preview-editor-button" title="撰写文本 Ctrl+Alt+M">
+            <span class="icon-pencil" style="color: rgb(187, 187, 187);"></span>
+        </li>
+    </ul>
+    <ul id="preview-button-row" class="preview-button-row">
+        <li class="preview-button-full-reader dropdown" id="preview-list-button" title="文本列表 Ctrl+Alt+F">
+            <span class="dropdown-toggle icon-reorder" data-toggle="dropdown" style="color: rgb(187, 187, 187);"></span>
+            <ul id="file-list" class="dropdown-menu theme-black pull-right" role="menu" style="max-height: 693px;">
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="centos7">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">centos7</span></span>
+                            <span class="tag-count pull-right">2</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-20 11:04:57">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921612" title="【已发布】 2017-10-30 10:45">
+        <i class="icon-share-sign"></i>
+        <span id="921612">centos7 查看启动ntp服务命令</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-17 17:06:59">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/918220" title="【已发布】 2017-10-17 17:06">
+        <i class="icon-share-sign"></i>
+        <span id="918220">centos7 支持中文显示</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="ceph">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">ceph</span></span>
+                            <span class="tag-count pull-right">14</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-11-02 10:00:20">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/936061" title="【已发布】 2017-11-02 10:00">
+        <i class="icon-share-sign"></i>
+        <span id="936061">组装恢复rbd</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-31 17:36:09">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/932688" title="【已发布】 2017-10-31 17:36">
+        <i class="icon-share-sign"></i>
+        <span id="932688">查看，创建，删除，映射rbd镜像</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-31 14:03:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/933967" title="【已发布】 2017-10-31 14:03">
+        <i class="icon-share-sign"></i>
+        <span id="933967">rbd: sysfs write failed</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:41:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921627" title="【已发布】 2017-10-30 10:41">
+        <i class="icon-share-sign"></i>
+        <span id="921627">1 slow requests are blocked &gt; 32 sec解决方法</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:41:19">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/932583" title="【已发布】 2017-10-30 10:41">
+        <i class="icon-share-sign"></i>
+        <span id="932583">创建，查看，删除pool，查看，修改pool参数命令总结</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:39:18">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/926154" title="【已发布】 2017-10-30 10:39">
+        <i class="icon-share-sign"></i>
+        <span id="926154">PG降级实验</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:38:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/926191" title="【已发布】 2017-10-30 10:38">
+        <i class="icon-share-sign"></i>
+        <span id="926191">pg peered实验</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-23 16:09:36">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/924784" title="【已发布】 2017-10-23 16:09">
+        <i class="icon-share-sign"></i>
+        <span id="924784">centos7下搭建ceph luminous（12.2.1）--无网或网络较差</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-23 14:29:49">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921646" title="【已发布】 2017-10-23 14:29">
+        <i class="icon-share-sign"></i>
+        <span id="921646">防止集群数据恢复设置</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-20 17:28:34">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/922153" title="【已发布】 2017-10-20 17:28">
+        <i class="icon-share-sign"></i>
+        <span id="922153">ceph:health_warn clock skew detected on mon的解决办法</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-20 16:49:39">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/922122" title="【已发布】 2017-10-20 16:49">
+        <i class="icon-share-sign"></i>
+        <span id="922122">umount: /var/lib/ceph/osd/ceph-1：目标忙</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-20 10:53:41">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921569" title="【已发布】 2017-10-20 11:11">
+        <i class="icon-share-sign"></i>
+        <span id="921569">集群重启某一主机下所有osd down解决办法</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-19 14:20:16">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/917693" title="【已发布】 2017-10-20 17:02">
+        <i class="icon-share-sign"></i>
+        <span id="917693">批量删除osd的shell脚本</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-17 10:52:56">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/917547" title="【已发布】 2017-10-17 10:52">
+        <i class="icon-share-sign"></i>
+        <span id="917547">不卸载ceph重新获取一个干净的集群环境</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="ceph-deploy">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">ceph-deploy</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-19 15:21:18">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/920621" title="【已发布】 2017-10-19 15:21">
+        <i class="icon-share-sign"></i>
+        <span id="920621" class="whiter-on-black">ceph-deploy add mon失败</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="ceph实验">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">ceph实验</span></span>
+                            <span class="tag-count pull-right">4</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-11-02 10:00:20">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/936061" title="【已发布】 2017-11-02 10:00">
+        <i class="icon-share-sign"></i>
+        <span id="936061">组装恢复rbd</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-31 17:36:09">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/932688" title="【已发布】 2017-10-31 17:36">
+        <i class="icon-share-sign"></i>
+        <span id="932688">查看，创建，删除，映射rbd镜像</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:39:18">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/926154" title="【已发布】 2017-10-30 10:39">
+        <i class="icon-share-sign"></i>
+        <span id="926154">PG降级实验</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:38:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/926191" title="【已发布】 2017-10-30 10:38">
+        <i class="icon-share-sign"></i>
+        <span id="926191">pg peered实验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="ceph环境搭建">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">ceph环境搭建</span></span>
+                            <span class="tag-count pull-right">2</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-23 16:09:36">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/924784" title="【已发布】 2017-10-23 16:09">
+        <i class="icon-share-sign"></i>
+        <span id="924784">centos7下搭建ceph luminous（12.2.1）--无网或网络较差</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-17 10:52:56">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/917547" title="【已发布】 2017-10-17 10:52">
+        <i class="icon-share-sign"></i>
+        <span id="917547">不卸载ceph重新获取一个干净的集群环境</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="ceph运维">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">ceph运维</span></span>
+                            <span class="tag-count pull-right">10</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-31 14:03:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/933967" title="【已发布】 2017-10-31 14:03">
+        <i class="icon-share-sign"></i>
+        <span id="933967">rbd: sysfs write failed</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:41:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921627" title="【已发布】 2017-10-30 10:41">
+        <i class="icon-share-sign"></i>
+        <span id="921627">1 slow requests are blocked &gt; 32 sec解决方法</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:41:19">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/932583" title="【已发布】 2017-10-30 10:41">
+        <i class="icon-share-sign"></i>
+        <span id="932583">创建，查看，删除pool，查看，修改pool参数命令总结</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-23 14:29:49">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921646" title="【已发布】 2017-10-23 14:29">
+        <i class="icon-share-sign"></i>
+        <span id="921646">防止集群数据恢复设置</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-20 17:28:34">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/922153" title="【已发布】 2017-10-20 17:28">
+        <i class="icon-share-sign"></i>
+        <span id="922153">ceph:health_warn clock skew detected on mon的解决办法</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-20 16:49:39">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/922122" title="【已发布】 2017-10-20 16:49">
+        <i class="icon-share-sign"></i>
+        <span id="922122">umount: /var/lib/ceph/osd/ceph-1：目标忙</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-20 10:53:41">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921569" title="【已发布】 2017-10-20 11:11">
+        <i class="icon-share-sign"></i>
+        <span id="921569">集群重启某一主机下所有osd down解决办法</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-19 15:21:18">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/920621" title="【已发布】 2017-10-19 15:21">
+        <i class="icon-share-sign"></i>
+        <span id="920621" class="whiter-on-black">ceph-deploy add mon失败</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-19 14:20:16">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/917693" title="【已发布】 2017-10-20 17:02">
+        <i class="icon-share-sign"></i>
+        <span id="917693">批量删除osd的shell脚本</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-17 10:52:56">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/917547" title="【已发布】 2017-10-17 10:52">
+        <i class="icon-share-sign"></i>
+        <span id="917547">不卸载ceph重新获取一个干净的集群环境</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="mon">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">mon</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-20 17:28:34">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/922153" title="【已发布】 2017-10-20 17:28">
+        <i class="icon-share-sign"></i>
+        <span id="922153">ceph:health_warn clock skew detected on mon的解决办法</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="osd">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">osd</span></span>
+                            <span class="tag-count pull-right">3</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-20 16:49:39">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/922122" title="【已发布】 2017-10-20 16:49">
+        <i class="icon-share-sign"></i>
+        <span id="922122">umount: /var/lib/ceph/osd/ceph-1：目标忙</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-20 10:53:41">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/921569" title="【已发布】 2017-10-20 11:11">
+        <i class="icon-share-sign"></i>
+        <span id="921569">集群重启某一主机下所有osd down解决办法</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-19 14:20:16">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/917693" title="【已发布】 2017-10-20 17:02">
+        <i class="icon-share-sign"></i>
+        <span id="917693">批量删除osd的shell脚本</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="pg">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">pg</span></span>
+                            <span class="tag-count pull-right">3</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-31 17:36:09">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/932688" title="【已发布】 2017-10-31 17:36">
+        <i class="icon-share-sign"></i>
+        <span id="932688">查看，创建，删除，映射rbd镜像</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:39:18">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/926154" title="【已发布】 2017-10-30 10:39">
+        <i class="icon-share-sign"></i>
+        <span id="926154">PG降级实验</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:38:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/926191" title="【已发布】 2017-10-30 10:38">
+        <i class="icon-share-sign"></i>
+        <span id="926191">pg peered实验</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="pool">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">pool</span></span>
+                            <span class="tag-count pull-right">1</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-10-30 10:41:19">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/932583" title="【已发布】 2017-10-30 10:41">
+        <i class="icon-share-sign"></i>
+        <span id="932583">创建，查看，删除pool，查看，修改pool参数命令总结</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+                    <li>
+                    <ul class="tag-list">
+                        <li class="tag-item item" tag-name="rbd">
+                            <span class="pull-left"><i class="icon-tag"></i><span class="tag-name">rbd</span></span>
+                            <span class="tag-count pull-right">2</span>
+                            <div class="clearfix"></div>
+                        </li>
+                            
+    <li class="file-item item" file-created-date="2017-11-02 10:00:20">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/936061" title="【已发布】 2017-11-02 10:00">
+        <i class="icon-share-sign"></i>
+        <span id="936061">组装恢复rbd</span>
+        </a>
+    </li>
+
+                            
+    <li class="file-item item" file-created-date="2017-10-31 14:03:52">
+        <a tabindex="-1" href="https://www.zybuluo.com/dyj2017/note/933967" title="【已发布】 2017-10-31 14:03">
+        <i class="icon-share-sign"></i>
+        <span id="933967">rbd: sysfs write failed</span>
+        </a>
+    </li>
+
+                    </ul>
+                    </li>
+            </ul>
+            <ul id="file-list-topbar" class="dropdown-menu theme-black pull-right" role="menu">
+                <li id="search-file-bar">
+                    <i class="icon-search icon-large"></i>
+                    <input type="text" id="search-file-textbox" placeholder="搜索 dyj2017 的文稿标题， * 显示全部">
+                    <i class="icon-level-down icon-rotate-90 icon-large"></i>
+                </li>
+                <li id="tag-file-bar">
+                    以下【标签】将用于标记这篇文稿：
+                </li>
+            </ul>
+        </li>
+        <li class="preview-button-full-reader" id="preview-theme-button" title="主题切换 Ctrl+Alt+Y">
+            <span class="icon-adjust" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader" id="preview-fullscreen-button" title="全屏模式 F11">
+            <span class="icon-fullscreen" style="color: rgb(187, 187, 187);"></span>
+        </li>
+        <li class="preview-button-full-reader wmd-spacer"></li>
+        <li class="preview-button-full-reader dropdown" id="preview-about-button" title="关于本站">
+            <span class="dropdown-toggle icon-info-sign" data-toggle="dropdown" data-hover="dropdown" data-delay="100" data-close-others="true" style="color: rgb(187, 187, 187);"></span>
+            <ul id="about-menu" class="dropdown-menu theme-black pull-right" role="menu">
+                <li title="下载全平台客户端"><a tabindex="-1" href="https://www.zybuluo.com/cmd" target="_blank"><i class="icon-laptop"></i>下载客户端</a></li>
+                <li title="@ghosert"><a tabindex="-1" href="http://www.weibo.com/ghosert" target="_blank"><i class="icon-weibo"></i>关注开发者</a></li>
+                <li title=""><a tabindex="-1" href="https://github.com/ghosert/cmd-editor/issues" target="_blank"><i class="icon-github-alt"></i>报告问题，建议</a></li>
+                <li title="support@zybuluo.com"><a tabindex="-1" href="mailto:support@zybuluo.com" target="_blank"><i class="icon-envelope"></i>联系我们</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<ul id="reader-full-toolbar-tail" class="reader-full-toolbar-tail-shown">
+    <li class="preview-button-full-reader" id="preview-hidden-button" title="隐藏工具栏 Ctrl+Alt+I">
+        <span class="icon-chevron-sign-right" style="color: rgb(187, 187, 187);"></span>
+    </li>
+</ul>
+
+
+
+
+
+
+<!-- side remark, hidden when loading. -->
+<div class="remark-list side-remark-hidden">
+    <div class="remark-items">
+    </div>
+    <div class="leave-remark unselectable"><span class="icon-plus-sign-alt"></span><span>添加新批注</span></div>
+    <div class="new-remark">
+    <div class="remark-head"><a><img src="./ceph报错解决_files/default-head.jpg" style="width: 32px; height: 32px;"></a></div>
+    <div class="remark-author unselectable"><strong></strong></div>
+    <div class="remark-editor" contenteditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+        <div class="remark-notice">在作者公开此批注前，只有你和作者可见。</div>
+    </div>
+</div>
+
+<!-- template for new remark/reply -->
+<div class="new-remark-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="./ceph报错解决_files/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-editor" contenteditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+    </div>
+</div>
+
+<!-- template for .remark-item/.remark-reply -->
+<div class="remark-item-reply side-remark-hidden">
+    <div class="remark-head"><a><img src="./ceph报错解决_files/default-head.jpg"></a></div>
+    <div class="remark-author unselectable"></div>
+    <div class="remark-delete-link unselectable"><span class="icon-remove"></span></div> <!--This is mainly for deleting remark-reply, shown when author/remark hovering on remark-reply.-->
+    <div class="remark-editor" contenteditable="true" spellcheck="false"></div>
+    <!-- this will be filled up by js.
+    <div class="inline-error">402/400</div> for new remark
+    <div class="inline-error">202/200</div> for new reply
+    -->
+    <div class="remark-footer unselectable">
+        <button class="remark-edit btn-link">修改</button>
+        <button class="remark-save btn-link">保存</button>
+        <button class="remark-cancel btn-link">取消</button>
+        <button class="remark-delete btn-link">删除</button>
+    </div>
+</div>
+
+<!-- template for remark-item-->
+<div class="remark-item side-remark-hidden" data-rand-id="" data-version-id="">
+    <div class="remark-published-link unselectable"><span class="icon-link icon-rotate-90"></span></div>
+    <ul class="remark-options theme unselectable theme-white">
+        <li class="remark-private"><span class="icon-eye-close"></span><span>私有</span></li>
+        <li class="remark-public"><span class="icon-group"></span><span>公开</span></li>
+        <li class="remark-delete"><span class="icon-remove"></span><span>删除</span></li>
+    </ul>
+
+    <!-- clone the template $('.remark-item-reply').html() to here.-->
+
+    <button class="remark-reply-view-more btn-link">查看更早的 5 条回复</button>
+    <div class="remark-replies">
+        <!--
+        <div class="remark-reply">
+            clone the template $('.remark-item-reply').html() to here.
+        </div>
+        -->
+    </div>
+
+    <div class="leave-reply unselectable"><span>回复批注</span></div>
+    <div class="new-reply">
+        <!-- clone the template $('.new-remark-reply').html() to here.-->
+    </div>
+</div>
+
+<!-- jiawzhang NOTICE: .remark-icons will be put to mdeditor.mako and user_note.mako, where next to .wmd-preview -->
+<!-- <div class="remark-icons"></div> -->
+
+<!-- template for remark-icon -->
+<div class="remark-icon unselectable side-remark-hidden remark-icon-empty" style="display: none;">
+    <span class="icon-stack">
+        <i class="glyph-comment"></i>
+        <span class="remark-count"></span>
+    </span>
+</div>
+
+
+<!-- canvas, hidden always, this is used to convert svg to canvas and then convert canvas to png. -->
+<canvas id="svg-canvas-image" class="editor-reader-hidden-always"></canvas>
+
+<!-- This is the image panel to hold enlarged image/svg. -->
+<div id="large-image-panel">
+    <img id="large-image">
+</div>
+
+
+    
+
+
+    <!-- Hidden Popup Modal -->
+    <div id="notification-popup-window" class="modal hide fade theme theme-white" tabindex="-1" role="dialog" aria-labelledby="notification-title" aria-hidden="true">
+        <div class="modal-header theme theme-white">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="notification-title">通知</h3>
+        </div>
+        <div class="modal-body theme theme-white">
+            <p></p>
+        </div>
+        <div class="modal-footer theme theme-white">
+            <button id="notification-cancel" class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+            <button id="notification-confirm" class="btn btn-primary">确认</button>
+        </div>
+    </div>
+
+    <!-- zybuluo's foot -->
+
+    <script src="./ceph报错解决_files/288313bb.base.lib.min.js"></script>
+
+    <script>
+        Namespace('com.zybuluo.base');
+        com.zybuluo.base.initData = {
+            globalPromptUrl: "https://www.zybuluo.com/global/prompt",
+        };
+    </script>
+
+    
+    <!--mathjax-->
+    <!--blacker: 1 below means font weight.-->
+    <script type="text/x-mathjax-config;executed=true">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]], processEscapes: true }, TeX: { equationNumbers: { autoNumber: "AMS" } }, messageStyle: "none", SVG: { blacker: 1 }});
+    </script>
+    <script src="./ceph报错解决_files/mathJax.js"></script>
+    <!--mathjax source code is here: https://github.com/mathjax/MathJax.-->
+    <script src="./ceph报错解决_files/mathJax(1).js"></script>
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.layout');
+        com.zybuluo.mdeditor.layout.initData = {
+            // '' means not logged in, otherwise the logged in username, for mdeditor.mako, this value will be reset in render.js otherwise, for user_note.mako, it's rendered by server side.
+            loggedInUsername: '',
+            isPageOwner: 'False' === 'True' ? true : false,
+            loginComeFromUrl: 'https://www.zybuluo.com/login?return_to=https%3A%2F%2Fwww.zybuluo.com%2Fdyj2017%2Fnote%2F920621',
+            noteRemarksUrl: "https://www.zybuluo.com/note/920621/remarks", 
+            newNoteRemarkUrl: "https://www.zybuluo.com/note/920621/remark/new", 
+            updateNoteRemarkUrl: "https://www.zybuluo.com/note/920621/remark/update", 
+            deleteNoteRemarkUrl: "https://www.zybuluo.com/note/920621/remark/delete", 
+            publishNoteRemarkUrl: "https://www.zybuluo.com/note/920621/remark/publish", 
+            newNoteRemarkReplyUrl: "https://www.zybuluo.com/note/920621/remark_reply/new", 
+            updateNoteRemarkReplyUrl: "https://www.zybuluo.com/note/920621/remark_reply/update", 
+            deleteNoteRemarkReplyUrl: "https://www.zybuluo.com/note/920621/remark_reply/delete", 
+        };
+
+        // BEGIN: pace.js configuration
+        window.paceOptions = {
+            // disable others, enable for ajax call only,
+            ajax: true,
+            document: false,
+            elements: false,
+            eventLag: false,
+        };
+        // jiawzhang NOTICE: to make sure pace.js is working for any ajax call especially the jquery ajax, add 'Pace.restart()' into jquery ajax call like '$.post'
+        // Originally, pace 0.5.6 doesn't support jquery ajax, see details in: https://github.com/HubSpot/pace/issues/29
+        // END: pace.js configuration
+
+    </script>
+
+    <script src="./ceph报错解决_files/7a70106e.layout.lib.min.js"></script>
+
+    <script src="./ceph报错解决_files/dc648f35.layout.min.js"></script><div id="medium-editor-toolbar-1" class="medium-editor-toolbar"><ul id="medium-editor-toolbar-actions" class="medium-editor-toolbar-actions clearfix"><li><button data-action="remark" class=" medium-editor-button-first"><i class="icon-comment"></i></button></li><li><button data-action="highlight" class=" medium-editor-button-last"><i class="icon-pencil"></i></button></li></ul></div>
+
+
+
+    
+
+    <!-- https://www.zybuluo.com/static/assets/mdeditor/user_note.lib.min.js -->
+    <!-- -->
+
+    <script>
+        Namespace('com.zybuluo.mdeditor.user_note');
+        com.zybuluo.mdeditor.user_note.initData = {
+            isLoggedIn: 'False',
+            mdeditorUrl: "https://www.zybuluo.com/mdeditor",
+            passwordPassed: 'True' === 'True' ? true : false,
+        };
+    </script>
+
+    <script src="./ceph报错解决_files/6cd3112e.user_note.min.js"></script>
+
+
+
+
+
+    
+</body></html>

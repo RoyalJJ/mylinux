@@ -1,0 +1,55 @@
+
+<!-- saved from url=(0089)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY01/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./01EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./01EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./01EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./01EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./01EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 简述常见Web服务器软件有哪些</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>Apache、 Nginx、 Lighttpd 、Tomcat、 IBM WebSphere、IIS。</p> 
+   </div> 
+   <div> 
+    <h3>2 使用Nginx部署基于域名的虚拟主机如何修改配置文件</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY01/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY01/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY01/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@nginx <span class="sh_symbol">~]</span># <span class="sh_normal">vim </span><span class="sh_symbol">/</span><span class="sh_normal">usr</span><span class="sh_symbol">/</span><span class="sh_normal">local</span><span class="sh_symbol">/</span><span class="sh_normal">nginx</span><span class="sh_symbol">/</span>nginx<span class="sh_symbol">.</span>conf</li><li><span class="sh_symbol">..</span> <span class="sh_symbol">..</span></li><li>server <span class="sh_cbracket">{</span></li><li>        listen       <span class="sh_number">80</span><span class="sh_symbol">;</span>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//端口</span></li><li>        server_name  web1<span class="sh_symbol">.</span>plj<span class="sh_symbol">.</span>com<span class="sh_symbol">;</span>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//域名</span></li><li>        <span class="sh_normal">location </span><span class="sh_symbol">/</span> <span class="sh_cbracket">{</span></li><li>              <span class="sh_normal">root   </span><span class="sh_symbol">/</span>web1<span class="sh_symbol">;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//网页根路径</span></li><li>              index  index<span class="sh_symbol">.</span>html<span class="sh_symbol">;</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//定义首页文档</span></li><li>          <span class="sh_cbracket">}</span></li><li><span class="sh_cbracket">}</span></li><li>    server <span class="sh_cbracket">{</span></li><li>        listen       <span class="sh_number">80</span><span class="sh_symbol">;</span></li><li>        server_name  web2<span class="sh_symbol">.</span>plj<span class="sh_symbol">.</span>com<span class="sh_symbol">;</span></li><li>        <span class="sh_normal">location </span><span class="sh_symbol">/</span> <span class="sh_cbracket">{</span></li><li>              <span class="sh_normal">root   </span><span class="sh_symbol">/</span>web2<span class="sh_symbol">;</span></li><li>              index  index<span class="sh_symbol">.</span>html<span class="sh_symbol">;</span> </li><li>          <span class="sh_cbracket">}</span></li><li><span class="sh_cbracket">}</span></li><li><span class="sh_symbol">..</span> <span class="sh_symbol">..</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@nginx ~]# vim /usr/local/nginx/nginx.conf
+.. ..
+server {
+        listen       80;  						//端口
+        server_name  web1.plj.com;   			//域名
+        location / {
+              root   /web1;						//网页根路径
+              index  index.html; 				//定义首页文档
+          }
+}
+    server {
+        listen       80;
+        server_name  web2.plj.com;
+        location / {
+              root   /web2;
+              index  index.html; 
+          }
+}
+.. ..
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>3 对网站进行SSL加密，如何生成私钥与证书</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY01/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY01/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/OPERATION/DAY01/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@nginx <span class="sh_symbol">~]</span># openssl genrsa <span class="sh_symbol">-</span>out cert<span class="sh_symbol">.</span>key <span class="sh_number">2048</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//生成私钥</span></li><li><span class="sh_symbol">[</span>root@nginx <span class="sh_symbol">~]</span># openssl req <span class="sh_symbol">-</span><span class="sh_keyword">new</span> <span class="sh_symbol">-</span>x509 <span class="sh_symbol">-</span>key test<span class="sh_symbol">.</span>pem <span class="sh_symbol">-</span>out cert<span class="sh_symbol">.</span>pem&nbsp;&nbsp;&nbsp;&nbsp;<span class="sh_comment">//生成证书</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@nginx ~]# openssl genrsa -out cert.key 2048					//生成私钥
+[root@nginx ~]# openssl req -new -x509 -key test.pem -out cert.pem	//生成证书
+</pre></div></div> 
+   </div> 
+  </div>  
+ 
+</body></html>

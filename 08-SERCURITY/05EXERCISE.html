@@ -1,0 +1,61 @@
+
+<!-- saved from url=(0088)http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY05/EXERCISE/01/index_answer.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+  <title>EXERCISE</title> 
+   
+  <script type="text/javascript" src="./05EXERCISE_files/jquery.min.js">
+    </script> 
+  <script type="text/javascript" src="./05EXERCISE_files/jquery.snippet.js">
+    </script> 
+  <script type="text/javascript" src="./05EXERCISE_files/main.js">
+    </script> 
+  <link type="text/css" href="./05EXERCISE_files/index.css" rel="Stylesheet"> 
+  <link type="text/css" href="./05EXERCISE_files/jquery.snippet.css" rel="Stylesheet"> 
+ </head> 
+ <body> 
+  <div class="source_style_exercise"> 
+   <div> 
+    <h3>1 简单描述Zabbix具有哪些监控功能</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>具备常见的商业监控软件所具备的功能 </li> 
+     <li>主机性能监控、网络设备监控、数据库监控等 </li> 
+     <li>支持多种报警机制 </li> 
+     <li>支持自动发现网络设备和服务器 </li> 
+     <li>可以通过配置自动发现服务器规则来实现 </li> 
+     <li>支持分布式，能集中展示、管理分布式的监控点 </li> 
+     <li>编写插件容易，可以自定义监控项 </li> 
+     <li>具有实时绘图功能 </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>2 简述源码编译安装Zabbix平台的操作步骤</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <div class="snippet-container" style="undefined;"><div class="sh_acid snippet-wrap"><div class="snippet-menu sh_sourceCode" style=""><pre style="display: none;"><a class="snippet-copy sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY05/EXERCISE/01/index_answer.html#" style="display: none;">copy</a><a class="snippet-text sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY05/EXERCISE/01/index_answer.html#">text</a><a class="snippet-window sh_url" href="http://tts.tmooc.cn/ttsPage/VIP/NSDVN201805/SECURITY/DAY05/EXERCISE/01/index_answer.html#">pop-up</a></pre></div><pre class="code sh_javascript snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_symbol">[</span>root@zabbixserver <span class="sh_symbol">~]</span># tar  zabbix<span class="sh_number">-2.2.1</span><span class="sh_symbol">.</span>tar<span class="sh_symbol">.</span>gz <span class="sh_symbol">-</span><span class="sh_normal">C </span><span class="sh_symbol">/</span><span class="sh_normal">usr</span><span class="sh_symbol">/</span>src</li><li><span class="sh_symbol">[</span>root@zabbixserver <span class="sh_symbol">~]</span># <span class="sh_normal">cd </span><span class="sh_symbol">/</span><span class="sh_normal">usr</span><span class="sh_symbol">/</span><span class="sh_normal">src</span><span class="sh_symbol">/</span>zabbix<span class="sh_number">-2.2.1</span><span class="sh_symbol">/</span></li><li><span class="sh_symbol">[</span>root@zabbixserver zabbix<span class="sh_number">-2.2.1</span><span class="sh_symbol">]</span># <span class="sh_symbol">./</span>configure <span class="sh_symbol">\</span></li><li><span class="sh_symbol">&gt;--</span>prefix<span class="sh_symbol">=</span><span class="sh_regexp">/usr/</span><span class="sh_normal">local</span><span class="sh_symbol">/</span>zabbix <span class="sh_symbol">--</span>enable<span class="sh_symbol">-</span>server <span class="sh_symbol">--</span>enable<span class="sh_symbol">-</span>proxy <span class="sh_symbol">\</span></li><li><span class="sh_symbol">&gt;--</span>enable<span class="sh_symbol">-</span>agent <span class="sh_symbol">--</span><span class="sh_keyword">with</span><span class="sh_symbol">-</span>mysql<span class="sh_symbol">=</span><span class="sh_regexp">/usr/</span><span class="sh_normal">bin</span><span class="sh_symbol">/</span>mysql_config <span class="sh_symbol">\</span></li><li><span class="sh_symbol">&gt;</span> <span class="sh_symbol">--</span><span class="sh_keyword">with</span><span class="sh_symbol">-</span>net<span class="sh_symbol">-</span>snmp <span class="sh_symbol">--</span><span class="sh_keyword">with</span><span class="sh_symbol">-</span>libcurl</li><li><span class="sh_symbol">[</span>root@zabbixserver zabbix<span class="sh_number">-2.2.1</span><span class="sh_symbol">]</span># make <span class="sh_symbol">&amp;&amp;</span> make install</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">[root@zabbixserver ~]# tar  zabbix-2.2.1.tar.gz -C /usr/src
+[root@zabbixserver ~]# cd /usr/src/zabbix-2.2.1/
+[root@zabbixserver zabbix-2.2.1]# ./configure \
+&gt;--prefix=/usr/local/zabbix --enable-server --enable-proxy \
+&gt;--enable-agent --with-mysql=/usr/bin/mysql_config \
+&gt; --with-net-snmp --with-libcurl
+[root@zabbixserver zabbix-2.2.1]# make &amp;&amp; make install
+</pre></div></div> 
+   </div> 
+   <div> 
+    <h3>3 使用Template OS Linux模板可以监控哪些项目</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <ul class="list"> 
+     <li>监控CPU </li> 
+     <li>监控内存 </li> 
+     <li>监控进程 </li> 
+     <li>监控网络流量 </li> 
+     <li>监控硬盘 </li> 
+    </ul> 
+   </div> 
+   <div> 
+    <h3>4 Zabbix_agent配置文件的名称是什么</h3> 
+    <p class="answerTitle">参考答案</p> 
+    <p>zabbix_agentd.conf。</p> 
+   </div> 
+  </div>  
+ 
+</body></html>
