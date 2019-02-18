@@ -104,11 +104,15 @@ NN1: 验证节点状态 ./bin/yarn node -list
 ./sbin/start-balancer.sh
 
 删除节点
+vim /usr/local/hadoop/etc/hadoop/hdfs-site.xml
+
 <property>
     <name>dfs.hosts.exclude</name>
     <value>/usr/local/hadoop/etc/hadoop/exclude</value>
 </property>
-
+ 
+echo "newnode" >  /usr/local/hadoop/etc/hadoop/exclude 
+ 
 开始导出数据
 ./bin/hdfs dfsadmin -refreshNodes
 
@@ -170,10 +174,18 @@ mkdir /var/nfstmp
 chown nsd1803:nsd1803 /var/nfstmp
 
 NFSGW: 给 /usr/local/hadoop/logs 赋权
-setfacl -m u:nsd1803:rwx
+setfacl -m u:nsd1803:rwx /usr/local/hadoop/logs 
 
 创建数据根目录 /var/hadoop
 mkdir /var/hadoop
+
+启动portmp和nfs3
+cd /usr/local/hadoop/
+./sbin/hadoop-daemon.sh --script ./bin/hdfs start portmap
+su - l nsd1803
+cd /usr/local/hadoop/
+./sbin/hadoop-daemon.sh --script ./bin/hdfs start nfs3
+
 
 Client: 安装 nfs-utils 
 mount 共享目录
@@ -391,7 +403,7 @@ nodeX:  启动 journalnode 服务
 
 NN1: 格式化  ./bin/hdfs  namenode  -format
 
-NN2: 数据同步到本地 /var/hadoop/dfs
+NN2: 数据同步到本地 rsync -aSH nn01:/var/hadoop/dfs /var/hadoop/
 
 NN1: 初始化 JNS
         ./bin/hdfs namenode -initializeSharedEdits
@@ -422,5 +434,5 @@ NN2: ./sbin/yarn-daemon.sh start resourcemanager
 ./sbin/yarn-daemon.sh stop resourcemanager
 
 恢复节点
-./sbin/hadoop-daemon.sh stop namenode
-./sbin/yarn-daemon.sh stop resourcemanager
+./sbin/hadoop-daemon.sh start namenode
+./sbin/yarn-daemon.sh start resourcemanager
